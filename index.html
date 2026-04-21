@@ -1,69 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-  <meta name="apple-mobile-web-app-title" content="PT Planner" />
-  <meta name="theme-color" content="#F97B2F" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="default"/>
+  <meta name="apple-mobile-web-app-title" content="PT Planner"/>
+  <meta name="theme-color" content="#1B3A6B"/>
   <title>PT Planner</title>
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet"/>
 </head>
 <body>
 <div class="app">
 
+  <!-- ══ HOME ══ -->
   <div id="view-home" class="view active">
-    <div class="hero-banner">
-      <div class="hero-greeting" id="hero-greeting">Hello, there</div>
-      <div class="hero-count" id="hero-count">Today's Exercise Count: 0</div>
-    </div>
-    <div class="today-card">
-      <div class="today-card-label">Today's Workout</div>
-      <div class="today-card-preview">
-        <div class="today-card-text" id="today-preview-text">No exercises today — enjoy your rest!</div>
-        <div class="today-card-fade"></div>
+    <div class="home-header">
+      <div>
+        <div class="home-greeting-label">Good to see you</div>
+        <div class="home-greeting-name" id="hero-greeting">Loading…</div>
+        <div class="home-date" id="home-date"></div>
       </div>
-      <button class="today-cta" onclick="switchView('today')">
-        <div class="today-cta-text"><span>Take Me To</span><span>Today's Workout</span></div>
-        <div class="cta-arrow">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
+    </div>
+
+    <!-- Weekly goal ring -->
+    <div class="weekly-card">
+      <div class="ring-wrap">
+        <svg width="54" height="54" viewBox="0 0 54 54">
+          <circle class="ring-track" cx="27" cy="27" r="22"/>
+          <circle class="ring-fill" id="ring-fill" cx="27" cy="27" r="22"
+            stroke-dasharray="138.2" stroke-dashoffset="138.2"/>
+        </svg>
+        <div class="ring-label" id="ring-label">0/0</div>
+      </div>
+      <div class="weekly-info">
+        <div class="weekly-title">Weekly goal</div>
+        <div class="weekly-sub" id="weekly-sub">Loading…</div>
+      </div>
+      <div class="weekly-streak">
+        <div class="weekly-streak-num" id="streak-num">0</div>
+        <div style="font-size:16px;line-height:1">🔥</div>
+        <div class="weekly-streak-lbl">Streak</div>
+      </div>
+    </div>
+
+    <!-- Today -->
+    <div class="home-section-label">Today</div>
+    <div class="today-hero" id="today-hero">
+      <div class="today-hero-label">Today's Workout</div>
+      <div class="today-hero-title" id="today-hero-title">Loading…</div>
+      <div class="today-hero-sub" id="today-hero-sub"></div>
+      <button class="today-hero-cta" onclick="setActiveNav('workout')">
+        Start
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
     </div>
-    <div class="action-row">
-      <button class="action-btn" onclick="switchView('add')">
-        <div class="action-icon"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><line x1="16" y1="7" x2="16" y2="25" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><line x1="7" y1="16" x2="25" y2="16" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></div>
-        <span class="action-label">Add</span>
-      </button>
-      <button class="action-btn" onclick="switchView('calendar')">
-        <div class="action-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="3" y="5" width="22" height="20" rx="3" stroke="currentColor" stroke-width="2"/><line x1="3" y1="11" x2="25" y2="11" stroke="currentColor" stroke-width="2"/><line x1="9" y1="2" x2="9" y2="8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="19" y1="2" x2="19" y2="8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
-        <span class="action-label">Schedule</span>
-      </button>
-      <button class="action-btn" onclick="switchView('manage')">
-        <div class="action-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><polyline points="5,8 9,12 15,4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><line x1="13" y1="8" x2="24" y2="8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><polyline points="5,18 9,22 15,14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><line x1="13" y1="18" x2="24" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
-        <span class="action-label">Manage</span>
-      </button>
+
+    <!-- All exercises -->
+    <div class="home-section-label" style="margin-top:6px">All Exercises</div>
+    <div class="home-ex-list" id="home-ex-list"></div>
+  </div>
+
+  <!-- ══ WORKOUT ══ -->
+  <div id="view-workout" class="view">
+    <div class="workout-top">
+      <div class="workout-top-title" id="workout-title">Today's Workout</div>
+      <div class="workout-top-sub" id="workout-sub"></div>
     </div>
-    <div class="section-title">All Exercises</div>
-    <div id="home-exercise-list"></div>
+    <div class="workout-action-bar">
+      <button class="btn-start" id="btn-start" onclick="startWorkout()">Start Workout</button>
+      <button class="btn-finish" id="btn-finish" onclick="finishWorkout()">Finish Workout ✓</button>
+    </div>
+    <div id="workout-list" style="padding-top:4px"></div>
   </div>
 
-  <div id="view-today" class="view">
-    <div class="view-header"><button class="back-btn" onclick="switchView('home')"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M12 3l-6 6 6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="view-title">Today's Workout</div></div>
-    <div id="today-exercises"></div>
+  <!-- ══ FINISH / WRAP UP ══ -->
+  <div id="view-finish" class="view">
+    <div class="view-header">
+      <button class="back-btn" onclick="setActiveNav('workout')">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M12 3l-6 6 6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="view-title">Wrap Up</div>
+    </div>
+    <div class="finish-card" id="finish-content"></div>
+    <div class="finish-actions">
+      <button class="btn-ghost" onclick="shareSession()">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" style="vertical-align:middle;margin-right:4px"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8M16 6l-4-4-4 4M12 2v13" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Share
+      </button>
+      <button class="btn-primary" style="flex:2;margin-top:0" onclick="saveSession()">Save &amp; Finish</button>
+    </div>
   </div>
 
-  <div id="view-calendar" class="view">
-    <div class="view-header"><button class="back-btn" onclick="switchView('home')"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M12 3l-6 6 6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="view-title">Weekly Schedule</div></div>
-    <div id="calendar-content"></div>
+  <!-- ══ HISTORY ══ -->
+  <div id="view-history" class="view">
+    <div style="padding:1.5rem 1.25rem .5rem">
+      <div style="font-size:22px;font-weight:800;color:var(--text-1)">History</div>
+    </div>
+    <div class="history-filter-bar">
+      <button class="hf-btn active" data-filter="day"    onclick="setHistoryFilter('day')">Day</button>
+      <button class="hf-btn"        data-filter="week"   onclick="setHistoryFilter('week')">Week</button>
+      <button class="hf-btn"        data-filter="2weeks" onclick="setHistoryFilter('2weeks')">2 Weeks</button>
+      <button class="hf-btn"        data-filter="month"  onclick="setHistoryFilter('month')">Month</button>
+    </div>
+    <div class="history-nav">
+      <button class="hnav-btn" onclick="shiftHistory(1)">&#8249;</button>
+      <div class="history-range" id="history-range"></div>
+      <button class="hnav-btn" onclick="shiftHistory(-1)">&#8250;</button>
+    </div>
+    <div id="history-list"></div>
   </div>
 
+  <!-- ══ MANAGE ══ -->
+  <div id="view-manage" class="view">
+    <div style="padding:1.5rem 1.25rem .75rem;display:flex;align-items:center;justify-content:space-between">
+      <div style="font-size:22px;font-weight:800;color:var(--text-1)">Exercises</div>
+      <button class="btn-sm" onclick="setActiveNav('add')" style="border-color:var(--navy);color:var(--navy)">+ Add New</button>
+    </div>
+    <div id="manage-list"></div>
+  </div>
+
+  <!-- ══ ADD ══ -->
   <div id="view-add" class="view">
-    <div class="view-header"><button class="back-btn" onclick="switchView('home')"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M12 3l-6 6 6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="view-title">Add Exercise</div></div>
+    <div style="padding:1.5rem 1.25rem .75rem">
+      <div style="font-size:22px;font-weight:800;color:var(--text-1)">Add Exercise</div>
+    </div>
     <div class="form-card">
       <div class="form-row"><label class="form-label" for="f-name">Exercise name</label><input type="text" id="f-name" placeholder="e.g. Bird Dog" autocomplete="off"/></div>
       <div class="form-row"><label class="form-label" for="f-detail">Instructions / notes</label><textarea id="f-detail" rows="3" placeholder="e.g. On hands and knees, extend opposite arm and leg…"></textarea></div>
@@ -72,20 +136,60 @@
         <div class="form-row"><label class="form-label" for="f-reps">Reps</label><input type="number" id="f-reps" placeholder="10" min="1" max="100"/></div>
       </div>
       <div class="form-row"><label class="form-label" for="f-freq">Times per week</label>
-        <select id="f-freq"><option value="1">1× per week</option><option value="2">2× per week</option><option value="3" selected>3× per week</option><option value="4">4× per week</option><option value="5">5× per week</option><option value="6">6× per week</option><option value="7">Every day</option></select>
+        <select id="f-freq">
+          <option value="1">1× per week</option><option value="2">2× per week</option>
+          <option value="3" selected>3× per week</option><option value="4">4× per week</option>
+          <option value="5">5× per week</option><option value="6">6× per week</option>
+          <option value="7">Every day</option>
+        </select>
       </div>
       <p class="form-error" id="form-error"></p>
       <button class="btn-primary" onclick="addExercise()">Add to Plan</button>
     </div>
   </div>
 
-  <div id="view-manage" class="view">
-    <div class="view-header"><button class="back-btn" onclick="switchView('home')"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M12 3l-6 6 6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="view-title">Manage Exercises</div></div>
-    <div id="manage-list"></div>
-  </div>
+</div><!-- /.app -->
 
-</div>
+<!-- Bottom nav -->
+<nav class="bottom-nav">
+  <button class="nav-btn active" data-nav="home" onclick="setActiveNav('home')">
+    <div class="nav-icon">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M3 9.5L11 3l8 6.5V19a1 1 0 01-1 1H14v-5H8v5H4a1 1 0 01-1-1V9.5z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+    </div>
+    <div class="nav-label">Home</div>
+    <div class="nav-active-dot"></div>
+  </button>
+  <button class="nav-btn" data-nav="workout" onclick="setActiveNav('workout')">
+    <div class="nav-icon">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="8.5" stroke="currentColor" stroke-width="1.8"/><path d="M8 11l2 2 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <div class="nav-label">Workout</div>
+    <div class="nav-active-dot"></div>
+  </button>
+  <button class="nav-btn" data-nav="history" onclick="setActiveNav('history')">
+    <div class="nav-icon">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="8.5" stroke="currentColor" stroke-width="1.8"/><path d="M11 7v4l2.5 2.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+    </div>
+    <div class="nav-label">History</div>
+    <div class="nav-active-dot"></div>
+  </button>
+  <button class="nav-btn" data-nav="manage" onclick="setActiveNav('manage')">
+    <div class="nav-icon">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="3" y="5" width="16" height="2.5" rx="1.25" fill="currentColor"/><rect x="3" y="10" width="16" height="2.5" rx="1.25" fill="currentColor"/><rect x="3" y="15" width="10" height="2.5" rx="1.25" fill="currentColor"/></svg>
+    </div>
+    <div class="nav-label">Exercises</div>
+    <div class="nav-active-dot"></div>
+  </button>
+  <button class="nav-btn" data-nav="add" onclick="setActiveNav('add')">
+    <div class="nav-icon">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="8.5" stroke="currentColor" stroke-width="1.8"/><line x1="11" y1="7" x2="11" y2="15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><line x1="7" y1="11" x2="15" y2="11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+    </div>
+    <div class="nav-label">Add</div>
+    <div class="nav-active-dot"></div>
+  </button>
+</nav>
 
+<!-- Edit modal -->
 <div class="modal-overlay" id="modal-overlay" onclick="closeModal()">
   <div class="modal" onclick="event.stopPropagation()">
     <div class="modal-handle"></div>
@@ -106,11 +210,12 @@
   </div>
 </div>
 
+<!-- Name prompt -->
 <div class="modal-overlay" id="name-overlay">
   <div class="modal" onclick="event.stopPropagation()">
     <div class="modal-handle"></div>
     <div class="modal-title">Welcome! 👋</div>
-    <p style="font-size:14px;color:#666;font-weight:600;margin-bottom:16px;line-height:1.5">What should we call you?</p>
+    <p style="font-size:14px;color:var(--text-2);font-weight:600;margin-bottom:16px;line-height:1.5">What should we call you?</p>
     <div class="form-row"><input type="text" id="name-input" placeholder="Your first name" autocomplete="given-name"/></div>
     <button class="btn-primary" onclick="saveName()">Let's Go</button>
   </div>
